@@ -1,0 +1,4 @@
+# pgzint extension
+comment = 'Zint Barcode Library for PostgreSQL'
+default_version = '0.1.0'
+relocatable = true
