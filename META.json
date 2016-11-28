@@ -1,0 +1,42 @@
+{
+   "name": "pgzint",
+   "abstract": "A PostgreSQL extension for the Zint barcode library",
+   "description": "This library contains a PostgreSQL extension called pgzint, which allows you to generate PNG-formatted barcode images from a number of different symbologies supported by Zint. It includes a helper view and table for information about supported barcode symbols, as well as convenience functions for generating default barcodes from input text.",
+   "version": "0.1.0",
+   "maintainer": [
+      "David Beauchamp <postgresql@davidbeauchamp.com>"
+   ],
+   "license": "mit",
+   "provides": {
+      "pgzint": {
+         "abstract": "A PostgreSQL extension for the Zint barcode library",
+         "file": "pgzint--0.1.0.sql",
+         "docfile": "README.md",
+         "version": "0.1.0"
+      }
+   },
+   "resources": {
+      "bugtracker": {
+         "web": "https://github.com/davidbeauchamp/pgzint/issues/"
+      },
+      "repository": {
+        "url":  "git://github.com/davidbeauchamp/pgzint.git",
+        "web":  "https://github.com/davidbeauchamp/pgzint",
+        "type": "git"
+      }
+   },
+   "generated_by": "David Beauchamp",
+   "meta-spec": {
+      "version": "1.0.0",
+      "url": "http://pgxn.org/meta/spec.txt"
+   },
+   "tags": [
+      "pgzint",
+      "zint",
+      "barcode",
+      "symbols",
+      "qr",
+      "qr code",
+      "PDF417"
+   ]
+}
