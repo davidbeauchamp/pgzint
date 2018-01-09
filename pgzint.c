@@ -167,8 +167,9 @@ bc_generate(PG_FUNCTION_ARGS)
         barcode->option_3 = PG_GETARG_INT32(12);
 
     error = ZBarcode_Encode_and_Buffer(barcode, input, 0, 0);
-
-    if (error >= ZINT_WARN_INVALID_OPTION)
+    // zint changed ZWARN_INVALID_OPTION to ZINT_WARN_INVALID_OPTION
+    // both values are 2, so to keep compatible I just use the magic number
+    if (error >= 2)
     {
         ereport(ERROR, (errmsg("%s", barcode->errtxt)));
         ZBarcode_Delete(barcode);

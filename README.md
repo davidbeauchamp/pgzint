@@ -1,4 +1,4 @@
-# pgzint 0.1.0
+# pgzint 0.1.1
 =================
 
 PostgreSQL extension for the Zint Barcode library
