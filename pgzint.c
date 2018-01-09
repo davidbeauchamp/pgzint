@@ -57,12 +57,12 @@ bytea *png_from_barcode(struct zint_symbol *input)
 
     info_ptr = png_create_info_struct (png_ptr);
     if (info_ptr == NULL) {
-        png_destroy_write_struct (&png_ptr, &info_ptr);
+        png_destroy_write_struct(&png_ptr, &info_ptr);
         return 0;
     }
 
-    if (setjmp (png_jmpbuf (png_ptr))) {
-        png_destroy_write_struct (&png_ptr, &info_ptr);
+    if (setjmp(png_jmpbuf(png_ptr))) {
+        png_destroy_write_struct(&png_ptr, &info_ptr);
         return 0;
     }
 
@@ -76,7 +76,7 @@ bytea *png_from_barcode(struct zint_symbol *input)
                  PNG_COMPRESSION_TYPE_DEFAULT,
                  PNG_FILTER_TYPE_DEFAULT);
     
-    row_pointers = png_malloc(png_ptr, input->bitmap_height * sizeof (png_byte *));
+    row_pointers = png_malloc(png_ptr, input->bitmap_height * sizeof(png_byte *));
     for (y = 0; y < input->bitmap_height; y++) {
         png_byte *row = png_malloc(png_ptr, sizeof(uint8_t) * input->bitmap_width * pixel_size);
         row_pointers[y] = row;
@@ -168,7 +168,7 @@ bc_generate(PG_FUNCTION_ARGS)
 
     error = ZBarcode_Encode_and_Buffer(barcode, input, 0, 0);
 
-    if (error >= ZWARN_INVALID_OPTION)
+    if (error >= ZINT_WARN_INVALID_OPTION)
     {
         ereport(ERROR, (errmsg("%s", barcode->errtxt)));
         ZBarcode_Delete(barcode);
