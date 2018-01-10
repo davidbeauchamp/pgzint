@@ -1,4 +1,7 @@
 Changelog for pgzint
 
+0.1.1   2018-01-09
+      - Update to support zint 2.6.2
+
 0.1.0   2016-11-28
       - Initial version.
