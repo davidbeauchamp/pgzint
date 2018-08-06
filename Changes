@@ -1,5 +1,10 @@
 Changelog for pgzint
 
+0.1.2   2018-08-05
+      - Add support for barcode rotation
+      - Better guard against invalid input
+      - Thank you to Michal for suggesting both of the above
+
 0.1.1   2018-01-09
       - Update to support zint 2.6.2
 

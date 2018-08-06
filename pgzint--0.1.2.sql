@@ -1,20 +1,21 @@
 \echo Use "CREATE EXTENSION pgzint" to load this file. \quit
 
 /* primary functions */
-CREATE FUNCTION bc_generate(pinput text,
-                            psymbology integer,
-                            pheight integer,
-                            pscale integer,
-                            pwhitespacewidth integer,
-                            pborderwidth integer,
-                            poutputoptions integer,
-                            pfgcolor text,
-                            pbgcolor text,
-                            pshowtext boolean,
-                            poption1 integer,
-                            poption2 integer,
-                            poption3 integer                            
-                )
+CREATE OR REPLACE FUNCTION bc_generate(pinput text,
+                                       psymbology integer,
+                                       pheight integer,
+                                       pscale integer,
+                                       pwhitespacewidth integer,
+                                       pborderwidth integer,
+                                       poutputoptions integer,
+                                       pfgcolor text,
+                                       pbgcolor text,
+                                       pshowtext boolean,
+                                       poption1 integer,
+                                       poption2 integer,
+                                       poption3 integer, 
+                                       protation integer = 0                            
+)
 RETURNS bytea
 AS '$libdir/pgzint'
 LANGUAGE C IMMUTABLE;
@@ -24,7 +25,7 @@ RETURNS bytea
 LANGUAGE plpgsql IMMUTABLE STRICT
 AS $$
   BEGIN
-    RETURN(bc_generate(pinput, 58, NULL, 2, 0, NULL, NULL, NULL, NULL, NULL, NULL, 14, NULL));
+    RETURN(bc_generate(pinput, 58, NULL, 2, 0, NULL, NULL, NULL, NULL, NULL, NULL, 14, NULL, 0));
   END;
 $$;
 
@@ -33,7 +34,7 @@ RETURNS bytea
 LANGUAGE plpgsql IMMUTABLE STRICT
 AS $$
   BEGIN
-    RETURN(bc_generate(pinput, 9, NULL, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL));
+    RETURN(bc_generate(pinput, 9, NULL, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0));
   END;
 $$;
 
@@ -42,7 +43,7 @@ RETURNS bytea
 LANGUAGE plpgsql IMMUTABLE STRICT
 AS $$
   BEGIN
-    RETURN(bc_generate(pinput, 55, NULL, 3, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 928));
+    RETURN(bc_generate(pinput, 55, NULL, 3, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 928, 0));
   END;
 $$;
 
@@ -51,7 +52,7 @@ RETURNS bytea
 LANGUAGE plpgsql IMMUTABLE STRICT
 AS $$
   BEGIN
-    RETURN(bc_generate(pinput, 57, 33, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL));
+    RETURN(bc_generate(pinput, 57, 33, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0));
   END;
 $$;
 
@@ -60,7 +61,7 @@ RETURNS bytea
 LANGUAGE plpgsql IMMUTABLE STRICT
 AS $$
   BEGIN
-    RETURN(bc_generate(pinput, 20, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL));
+    RETURN(bc_generate(pinput, 20, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0));
   END;
 $$;
 
