@@ -1,1 +1,1 @@
-git archive --format zip --prefix=pgzint-0.1.2/ --output pgzint-0.1.2.zip master
+git archive --format zip --prefix=pgzint-0.1.3/ --output pgzint-0.1.3.zip master
