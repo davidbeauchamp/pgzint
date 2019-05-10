@@ -33,8 +33,17 @@ unsigned char *uchar_p_from_text_p(text *input)
     size_t len = VARSIZE(input) - VARHDRSZ;
     unsigned char *new = palloc0(len + 1);
     memcpy(new, VARDATA(input), len);
-    new[len] = 0;
+    new[len] = '\0';
     return new;
+}
+
+void validate_and_set_input(text *input, char *dest)
+{
+    size_t len = VARSIZE(input)-VARHDRSZ;
+    if (len >= sizeof(dest))
+      len = sizeof(dest)-1;
+    memcpy(dest, VARDATA(input), len);
+    dest[len] = '\0';
 }
 
 bytea *png_from_barcode(struct zint_symbol *input)
@@ -87,7 +96,7 @@ bytea *png_from_barcode(struct zint_symbol *input)
             pos += 3;
         }
     }
-  
+
     png_set_write_fn(png_ptr, &image, write_png_data, NULL);
     png_set_rows(png_ptr, info_ptr, row_pointers);
     png_write_png(png_ptr, info_ptr, PNG_TRANSFORM_IDENTITY, NULL);
@@ -155,14 +164,14 @@ bc_generate(PG_FUNCTION_ARGS)
     }
 
     if (!PG_ARGISNULL(3)) {
-        int scale = PG_GETARG_INT32(3);
+        float8 scale = PG_GETARG_FLOAT8(3);
         if (scale >= 0.01) {
             barcode->scale = scale;
         }
         else {
             ZBarcode_Delete(barcode);
             ereport(ERROR, (errmsg("Error creating barcode"),
-                            errdetail("Invalid scale provided: %d", scale),
+                            errdetail("Invalid scale provided: %f", scale),
                             errhint("Scale must be greater than or equal to 0.01")));
         }
     }
@@ -207,12 +216,12 @@ bc_generate(PG_FUNCTION_ARGS)
     }
 
     if (!PG_ARGISNULL(7))
-        strcpy(barcode->fgcolour, VARDATA(PG_GETARG_TEXT_P(7)));
+        validate_and_set_input(PG_GETARG_TEXT_P(7), barcode->fgcolour);
     else
         strcpy(barcode->fgcolour, "000000");
 
     if (!PG_ARGISNULL(8))
-        strcpy(barcode->bgcolour, VARDATA(PG_GETARG_TEXT_P(8)));
+        validate_and_set_input(PG_GETARG_TEXT_P(8), barcode->bgcolour);
     else
         strcpy(barcode->bgcolour, "FFFFFF");
 
@@ -277,7 +286,7 @@ bc_generate(PG_FUNCTION_ARGS)
         ZBarcode_Delete(barcode);
         ereport(ERROR, (errmsg("Zint Error: %s", barcode->errtxt)));
     }
-    
+
     result = png_from_barcode(barcode);
     ZBarcode_Delete(barcode);
     PG_RETURN_BYTEA_P(result);

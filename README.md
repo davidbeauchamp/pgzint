@@ -1,4 +1,4 @@
-# pgzint 0.1.3
+# pgzint 0.1.4
 =================
 
 PostgreSQL extension for the Zint Barcode library
@@ -14,7 +14,7 @@ It primarily adds a function, from pgzint.c:
         pinput text,
         psymbology integer,
         pheight integer,
-        pscale integer,
+        pscale float8,
         pwhitespacewidth integer,
         pborderwidth integer,
         poutputoptions integer,

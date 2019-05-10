@@ -1,5 +1,9 @@
 Changelog for pgzint
 
+0.1.4   2019-05-09
+      - [3] Buffer overflow on foreground and background colors
+      - Make scale a float8 (double) instead of integer, to align with Zint's API
+
 0.1.3   2018-08-05
       - [sigh] fix pgxn release
 

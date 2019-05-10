@@ -3,7 +3,7 @@
 PROG=$(basename $0)
 UTILDIR=$(dirname $0)
 
-PGVERSIONS="9.1.24 9.2.24 9.3.24 9.4.19 9.5.14 9.6.10 10.5 11beta4"
+PGVERSIONS="9.4.22 9.5.17 9.6.13 10.8 11.3"
 PGCONFIG="--with-readline --with-openssl --with-pam --with-krb5"
 PGZINTVER=0.1.3
 PGZINTURL="https://github.com/davidbeauchamp/pgzint.git"

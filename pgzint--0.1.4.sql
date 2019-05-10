@@ -1,26 +1,27 @@
 \echo Use "CREATE EXTENSION pgzint" to load this file. \quit
 
 /* primary functions */
-CREATE OR REPLACE FUNCTION bc_generate(pinput text,
-                                       psymbology integer,
-                                       pheight integer,
-                                       pscale integer,
-                                       pwhitespacewidth integer,
-                                       pborderwidth integer,
-                                       poutputoptions integer,
-                                       pfgcolor text,
-                                       pbgcolor text,
-                                       pshowtext boolean,
-                                       poption1 integer,
-                                       poption2 integer,
-                                       poption3 integer, 
-                                       protation integer = 0                            
+CREATE OR REPLACE FUNCTION bc_generate(
+  pinput text,
+  psymbology integer,
+  pheight integer,
+  pscale float8,
+  pwhitespacewidth integer,
+  pborderwidth integer,
+  poutputoptions integer,
+  pfgcolor text,
+  pbgcolor text,
+  pshowtext boolean,
+  poption1 integer,
+  poption2 integer,
+  poption3 integer, 
+  protation integer = 0
 )
 RETURNS bytea
 AS '$libdir/pgzint'
 LANGUAGE C IMMUTABLE;
 
-CREATE FUNCTION bc_qrcode(pinput text)
+CREATE OR REPLACE FUNCTION bc_qrcode(pinput text)
 RETURNS bytea
 LANGUAGE plpgsql IMMUTABLE STRICT
 AS $$
@@ -29,7 +30,7 @@ AS $$
   END;
 $$;
 
-CREATE FUNCTION bc_excode39(pinput text)
+CREATE OR REPLACE FUNCTION bc_excode39(pinput text)
 RETURNS bytea
 LANGUAGE plpgsql IMMUTABLE STRICT
 AS $$
@@ -38,7 +39,7 @@ AS $$
   END;
 $$;
 
-CREATE FUNCTION bc_pdf417(pinput text)
+CREATE OR REPLACE FUNCTION bc_pdf417(pinput text)
 RETURNS bytea
 LANGUAGE plpgsql IMMUTABLE STRICT
 AS $$
@@ -47,7 +48,7 @@ AS $$
   END;
 $$;
 
-CREATE FUNCTION bc_maxicode(pinput text)
+CREATE OR REPLACE FUNCTION bc_maxicode(pinput text)
 RETURNS bytea
 LANGUAGE plpgsql IMMUTABLE STRICT
 AS $$
@@ -56,7 +57,7 @@ AS $$
   END;
 $$;
 
-CREATE FUNCTION bc_code128(pinput text)
+CREATE OR REPLACE FUNCTION bc_code128(pinput text)
 RETURNS bytea
 LANGUAGE plpgsql IMMUTABLE STRICT
 AS $$
