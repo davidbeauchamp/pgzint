@@ -31,5 +31,14 @@ CREATE OR REPLACE FUNCTION bc_generate(
   protation integer = 0
 )
 RETURNS bytea
-AS '$libdir/pgzint'
+AS 'MODULE_PATHNAME'
 LANGUAGE C IMMUTABLE;
+
+CREATE OR REPLACE FUNCTION pgzint_version()
+RETURNS TEXT
+LANGUAGE plpgsql STABLE
+AS $$
+  BEGIN
+    RETURN '0.1.4';
+  END;
+$$;

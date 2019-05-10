@@ -18,7 +18,7 @@ CREATE OR REPLACE FUNCTION bc_generate(
   protation integer = 0
 )
 RETURNS bytea
-AS '$libdir/pgzint'
+AS 'MODULE_PATHNAME'
 LANGUAGE C IMMUTABLE;
 
 CREATE OR REPLACE FUNCTION bc_qrcode(pinput text)
@@ -63,6 +63,15 @@ LANGUAGE plpgsql IMMUTABLE STRICT
 AS $$
   BEGIN
     RETURN(bc_generate(pinput, 20, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0));
+  END;
+$$;
+
+CREATE OR REPLACE FUNCTION pgzint_version()
+RETURNS TEXT
+LANGUAGE plpgsql STABLE
+AS $$
+  BEGIN
+    RETURN '0.1.4';
   END;
 $$;
 
