@@ -1,5 +1,5 @@
-# pgzint 0.1.4
-=================
+pgzint 0.1.4
+============
 
 PostgreSQL extension for the Zint Barcode library
 
@@ -25,7 +25,7 @@ It primarily adds a function, from pgzint.c:
         poption2 integer,
         poption3 integer,
         protation integer = 0
-        )
+    )
 
 To determine information about what barcode symbologies are available, a table called `bc_symbols` and a view called `barcodes` have been added. Two functions, `getzintsymbolconstant(integer)` and `getzintsymbolid(text)` can be used to look make passing parameters to the barcode generation function easier.
 
@@ -60,6 +60,11 @@ To build it, just do this:
     make
     make installcheck
     make install
+
+If you are updating from a version prior to 0.1.4, after you make/make install
+issue the following to each database that has pgzint installed:
+
+    `ALTER EXTENSION pgzint UPDATE TO '0.1.4';`
 
 If you encounter an error such as:
 

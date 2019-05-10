@@ -1,8 +1,8 @@
-MODULE_big   = pgzint
+MODULE_big   = pgzint-0.1.4
 OBJS         = pgzint.o
 SHLIB_LINK   = -lzint -lpng
 EXTENSION    = pgzint
-DATA         = pgzint--0.1.4.sql
+DATA         = $(wildcard pgzint--*.sql)
 DOCS         = README.md
 TESTS        = $(wildcard test/sql/*.sql)
 REGRESS      = $(patsubst test/sql/%.sql,%,$(TESTS))
