@@ -1,4 +1,5 @@
 build_pgzint.sh export-ignore
 package.sh export-ignore
 .gitignore export-ignore
+.gitattributes export-ignore
 
