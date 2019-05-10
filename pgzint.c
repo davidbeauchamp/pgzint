@@ -40,7 +40,7 @@ unsigned char *uchar_p_from_text_p(text *input)
 void validate_and_set_input(text *input, char *dest)
 {
     size_t len = VARSIZE(input) - VARHDRSZ;
-    if (len >= strlen(dest))
+    if (len > strlen(dest))
       len = strlen(dest);
     memcpy(dest, VARDATA(input), len);
     dest[len] = '\0';
