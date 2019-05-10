@@ -5,7 +5,7 @@ UTILDIR=$(dirname $0)
 
 PGVERSIONS="9.4.22 9.5.17 9.6.13 10.8 11.3"
 PGCONFIG="--with-readline --with-openssl --with-pam --with-krb5"
-PGZINTVER=0.1.3
+PGZINTVER=0.1.4
 PGZINTURL="https://github.com/davidbeauchamp/pgzint.git"
 INITIALPATH="$PATH"
 STARTDIR=$(pwd)
